@@ -53,5 +53,5 @@ def upload_image(data):
     except Exception:
             return f"telegraph: {body['error']}"
     
-# if __name__ == "__main__":
-#     app.run()
+if __name__ == "__main__":
+    app.run()
