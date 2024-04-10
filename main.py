@@ -2,21 +2,21 @@ import enkacard
 import enkacard.encbanner
 import enkanetwork
 import asyncio
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 import requests
 from io import BytesIO
 
 app = Flask(__name__)
 
-async def card(id):
+async def card(id, designtype):
     async with enkacard.encbanner.ENC(uid = str(id)) as encard:
-        return await encard.creat()
+        return await encard.creat(template = (2 if str(designtype) == "2" else 1))
     
 @app.route("/<int:id>")
 def characters(id):
     try:
         characters = []
-        result = asyncio.run(card(id))
+        result = asyncio.run(card(id, request.args.get('design')))
         for dt in result.card:
             byte_io = BytesIO()
             dt.card.save(byte_io, "PNG")
