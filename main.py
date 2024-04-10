@@ -1,4 +1,5 @@
-from enkacard import encbanner
+import enkacard
+import enkacard.encbanner
 import enkanetwork
 import asyncio
 from flask import Flask, jsonify
@@ -8,7 +9,7 @@ from io import BytesIO
 app = Flask(__name__)
 
 async def card(id):
-    async with encbanner.ENC(uid = str(id)) as encard:
+    async with enkacard.encbanner.ENC(uid = str(id)) as encard:
         return await encard.creat()
     
 @app.route("/<int:id>")
@@ -28,6 +29,8 @@ def characters(id):
         return jsonify(characters) 
     except enkanetwork.exception.VaildateUIDError:
         return jsonify({'error': 'Invalid UID. Please check your UID.'}), 400 
+    except enkacard.enc_error.ENCardError:
+        return jsonify({'error': 'Enable display of the showcase in the game or add characters there.'}), 400 
     # for card in result.card:
         # print(card.card.save(card.name + ".png"))
     # print(result.card)
@@ -49,9 +52,9 @@ def upload_image(data):
         if 'src' in body[0]:
             return "https://telegra.ph" + body[0]['src']
         else:
-            return f"telegraph: {body['error']}"
+            return Exception(f"telegraph: {body['error']}")
     except Exception:
-            return f"telegraph: {body['error']}"
+            return Exception(f"telegraph: {body['error']}")
     
 if __name__ == "__main__":
     app.run()
