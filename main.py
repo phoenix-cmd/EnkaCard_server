@@ -26,7 +26,7 @@ def characters(id):
                 "url" :   upload_image(byte_io)
             })
             # print(upload_image(byte_io))
-        return jsonify(characters) 
+        return jsonify({'response': characters}) 
     except enkanetwork.exception.VaildateUIDError:
         return jsonify({'error': 'Invalid UID. Please check your UID.'}), 400 
     except enkacard.enc_error.ENCardError:
