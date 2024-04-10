@@ -1,4 +1,0 @@
-enkacard==3.3.0
-enkanetworkv2.py==2.0.4
-Flask==3.0.3
-Requests==2.31.0

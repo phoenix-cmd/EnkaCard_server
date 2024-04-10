@@ -4,7 +4,6 @@ import asyncio
 from flask import Flask, jsonify
 import requests
 from io import BytesIO
-import json
 
 app = Flask(__name__)
 
@@ -54,5 +53,5 @@ def upload_image(data):
     except Exception:
             return f"telegraph: {body['error']}"
     
-if __name__ == "__main__":
-    app.run()
+# if __name__ == "__main__":
+#     app.run()
