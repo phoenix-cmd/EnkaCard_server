@@ -1,5 +1,5 @@
 #!/bin/bash
-
+clear
 # Load environment variables from .env file (if it exists)
 if [[ -f .env ]]; then
   source .env
