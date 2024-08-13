@@ -5,6 +5,13 @@ import asyncio
 from flask import Flask, jsonify, request
 import requests
 from io import BytesIO
+from enkanetwork import EnkaNetworkAPI
+
+enka_update = EnkaNetworkAPI()
+
+async def update_genshin():
+    async with enka_update:
+        await enka_update.update_assets()
 
 app = Flask(__name__)
 
@@ -55,6 +62,7 @@ def upload_image(data):
             return Exception(f"telegraph: {body['error']}")
     except Exception:
             return Exception(f"telegraph: {body['error']}")
+asyncio.run(update_genshin())
     
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
