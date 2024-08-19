@@ -15,4 +15,4 @@ COPY . .
 
 EXPOSE 7860
 
-CMD gunicorn main:app -b 0.0.0.0:7860 -w 8 --timeout 600
+CMD python3 -m gunicorn main:app -b 0.0.0.0:7860 -w 8 --timeout 600
