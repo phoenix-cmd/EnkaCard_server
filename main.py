@@ -6,12 +6,13 @@ from flask import Flask, jsonify, request
 import requests
 from io import BytesIO
 from enkanetwork import EnkaNetworkAPI
+import os
 
 enka_update = EnkaNetworkAPI()
 
 async def update_genshin():
     async with enka_update:
-        await enka_update.update_assets(lang = ["EN"])
+        await enka_update.update_assets(lang = ["EN"], path="/tmp")
 
 app = Flask(__name__)
 
@@ -54,6 +55,15 @@ def hello_world():
 
 @app.route("/update_char")
 def upload():
+    data_dir = "/tmp/data"
+
+    if not os.path.exists(data_dir):
+        os.makedirs(data_dir)
+
+    data_dir = "/tmp/langs"
+
+    if not os.path.exists(data_dir):
+        os.makedirs(data_dir)
     asyncio.run(update_genshin())
     return 'Update smth ig!!'
 
