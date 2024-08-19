@@ -9,8 +9,7 @@ RUN apt-get update && \
     fonts-dejavu-core \
     fonts-dejavu-extra \
     fonts-liberation \
-    fonts-noto \
-    fonts-ubuntu &&\ 
+    fonts-noto && \
     rm -rf /var/lib/apt/lists/*
 
 ENV PORT=7860
