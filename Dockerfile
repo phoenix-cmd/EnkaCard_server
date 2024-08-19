@@ -3,6 +3,14 @@ FROM python:${PYTHON_VERSION}-slim AS base
 
 RUN apt-get update && \
     apt-get install -y pipenv && \
+    apt-get install -y \
+    fontconfig \
+    fonts-dejavu \
+    fonts-dejavu-core \
+    fonts-dejavu-extra \
+    fonts-liberation \
+    fonts-noto \
+    fonts-ubuntu &&\ 
     rm -rf /var/lib/apt/lists/*
 
 ENV PORT=7860
