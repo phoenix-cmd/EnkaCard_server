@@ -17,7 +17,7 @@ fi
 # Define a function to start Gunicorn
 start_gunicorn() {
   echo "Starting Gunicorn on port $PORT..."
-  exec gunicorn main:app -b 0.0.0.0:$PORT -w 8
+  exec gunicorn main:app -b 0.0.0.0:$PORT -w 8 --timeout 600
 }
 
 # Start Gunicorn initially
