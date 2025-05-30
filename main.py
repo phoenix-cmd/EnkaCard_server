@@ -13,6 +13,7 @@ from fastapi.responses import (
 import enkacard
 import uvicorn
 import requests
+import os
 
 # client = EnkaNetworkAPI()
 
@@ -140,4 +141,5 @@ if __name__ == "__main__":
     # if not os.path.exists(data_dir):
     #     os.makedirs(data_dir)
     # asyncio.run(update_genshin())
-    uvicorn.run("main:app", host="0.0.0.0", port=7860, workers=8, timeout_keep_alive=60000)
+    port = int(os.environ.get("PORT", 7860))
+    uvicorn.run("main:app", host="0.0.0.0", port=port, workers=8, timeout_keep_alive=60000)
