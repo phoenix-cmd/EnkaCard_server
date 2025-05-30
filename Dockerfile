@@ -58,4 +58,4 @@ COPY . .
 RUN pipenv run pip install git+https://github.com/KuntilBogel/EnkaNetwork.py fastapi asyncio enkacard uvicorn requests
 
 # ✅ Use the $PORT environment variable provided by Render
-CMD [ "pipenv", "run", "python", "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "${PORT}", "--workers", "8", "--timeout-keep-alive", "600" ]
+CMD [ "pipenv", "run", "python", "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "${PORT}", "--workers", "1", "--timeout-keep-alive", "600" ]
