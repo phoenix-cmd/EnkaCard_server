@@ -69,6 +69,28 @@ async def characters(id: int, design: str = "1"):  # Use async and await
     except Exception as e:
         return JSONResponse(content={'error': 'UNKNOWN ERR: ' + str(e)}, status_code=500)
 
+
+@app.get("/{id}/{char_id}")
+async def get_card_by_char(id: int, char_id: int, design: str = "1"):
+    try:
+        result = await card(id, design)
+
+        for dt in result.card:
+            if dt.character_id == char_id:
+                image = process_image(dt)
+                return JSONResponse(content={'card': [image]})
+        
+        return JSONResponse(content={'error': 'Character not found in profile.'}, status_code=404)
+
+    except enkanetwork.exception.VaildateUIDError:
+        return JSONResponse(content={'error': 'Invalid UID.'}, status_code=400)
+
+    except enkacard.enc_error.ENCardError:
+        return JSONResponse(content={'error': 'Showcase not enabled or character not available.'}, status_code=400)
+
+    except Exception as e:
+        return JSONResponse(content={'error': 'Server error: ' + str(e)}, status_code=500)
+
 @app.get("/")
 def hello_world():
     return 'AMERICA YA HALLO!!'
